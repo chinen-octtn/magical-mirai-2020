@@ -12,20 +12,24 @@
     <link href="./assets/css/style.css" rel="stylesheet">
     <script src="./assets/js/script.js" defer></script>
   </head>
-  <body data-load="false" data-play="false">
-    <div id="app">
+  <body>
+    <div id="app" data-load="false" data-play="false">
       <main>
         <h1 class="l-title">初音ミク「マジカルミライ 2020」プログラミング・コンテスト練習</h1>
         <p class="alert">音声が流れます</p>
+        <div id="beat">
+          <div class="beat-circle"></div>
+        </div>
+        <div class="c-media" id="media"></div>
         <div class="textWrap">
           <div id="text">
-            <p class="text"></p>
+            <p class="text"><span class="text-song-name"></span><span class="text-inner"></span></p>
           </div>
         </div>
+        <div id="text-next"></div>
         <div class="c-control" id="play">
           <button class="c-control__button" aria-label="再生する"></button>
         </div>
-        <div class="c-media" id="media"></div>
       </main>
     </div>
   </body>
