@@ -20,7 +20,7 @@ export function player() {
 
     // オブザーバインスタンスを作成
     const observer = new MutationObserver(() => {
-      const text = textWrap.querySelector('.text');
+      const text = textWrap.querySelector('.c-text__text');
 
       requestAnimationFrame(() => {
         setTimeout(() => {
@@ -40,34 +40,8 @@ export function player() {
     observer.observe(target, config);
   }
 
-  // beatを切り替え
-  const beatObserver = () => {
-    const target = beatWrap;
-
-    // オブザーバインスタンスを作成
-    const observer = new MutationObserver(() => {
-      requestAnimationFrame(() => {
-        beatCircle.classList.remove('is-beat');
-        setTimeout(() => {
-          beatCircle.classList.add('is-beat');
-        }, 0)
-      });
-    });
-
-    // オブザーバの設定
-    const config = {
-      attributes: true,
-      childList: true,
-      characterData: true
-    };
-
-    // 対象ノードとオブザーバの設定を渡す
-    observer.observe(target, config);
-  }
-
   // 表示切り替え用オブザーバー実行
   lyricObserver();
-  beatObserver();
 
   // TextAlive Player
   const player = new Player({
@@ -87,7 +61,7 @@ export function player() {
       let word = unit._parent.text;
       if (wordMemo !== word) {
         wordMemo = word;
-        textWrap.innerHTML = `<p class="c-text"><span class="c-text__inner">${word}</span></p>`;
+        textWrap.innerHTML = `<p class="c-text__text"><span class="c-text__inner">${word}</span></p>`;
       }
 
       let phraseWord = unit.next._parent.text;
@@ -137,13 +111,22 @@ export function player() {
         }
       })
     },
-    onThrottledTimeUpdate: () => {
+    onThrottledTimeUpdate: (position) => {
       // 再生中に0.1秒単位で実行
+      const time = Math.floor(position / 100);
+      // body.setAttribute('data-time', `time${time}`);
+
       const beat = player.getBeats().length;
 
-      if(beat) {
-        beatWrap.removeAttribute('data-beat');
-        beatWrap.setAttribute('data-beat', `${beat}`);
+      if(Number(time) > 60) {
+        if(beat) {
+          requestAnimationFrame(() => {
+            beatCircle.classList.remove('is-beat');
+            setTimeout(() => {
+              beatCircle.classList.add('is-beat');
+            }, 0)
+          });
+        }
       }
     },
     onPlay: () => {
