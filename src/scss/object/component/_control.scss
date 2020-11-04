@@ -22,7 +22,7 @@
   align-items: center;
   justify-content: center;
   z-index: 4;
-  transition: width $time $easing, height $time $easing, right $time $easing, bottom $time $easing, border-radius $time $time;
+  transition: width $time $easing, height $time $easing, right $time $easing, bottom $time $easing;
   transform: translate3d(0, 0, 20vw);
 
   [data-load="true"] & {
@@ -36,6 +36,7 @@
     width: 80px;
     height: 80px;
     border-radius: 50%;
+    transition: width $time $easing, height $time $easing, right $time $easing, bottom $time $easing, border-radius $time $time;
   }
 }
 
