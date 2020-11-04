@@ -13,8 +13,10 @@ export function player() {
   // lyric block
   const textWrap =       document.querySelector("#text");
   const nextText =       document.querySelector("#text-next");
+  // button
+  const playButton = document.querySelector('#play');
 
-  // 歌詞を切り替え
+  // 歌詞のstyle切り替え
   const lyricObserver = () => {
     const target = textWrap;
 
@@ -101,8 +103,9 @@ export function player() {
       nextText.innerText = player.video.firstPhrase;
 
       // 再生ボタン
-      const buttonPlay = document.querySelector('#play').addEventListener('click', e => {
+      playButton.addEventListener('click', e => {
         e.preventDefault();
+        playButton.classList.add('is-loading');
 
         if(player.isPlaying) {
           player.requestPause();
@@ -116,10 +119,10 @@ export function player() {
       const time = Math.floor(position / 100);
       // body.setAttribute('data-time', `time${time}`);
 
-      const beat = player.getBeats().length;
+      const beat = player.findBeat(player.timer.position).length;
 
-      if(Number(time) > 60) {
-        if(beat) {
+      if(beat) {
+        if(Number(time) > 60) {
           requestAnimationFrame(() => {
             beatCircle.classList.remove('is-beat');
             setTimeout(() => {
@@ -133,12 +136,14 @@ export function player() {
       // 再生したとき
       media.classList.add('is-active')
       media.classList.add('is-play');
-      body.setAttribute('data-play', 'true')
+      body.setAttribute('data-play', 'true');
+      playButton.classList.remove('is-loading');
     },
     onPause: () => {
       // 一時停止したとき
       body.setAttribute('data-play', 'false')
       media.classList.remove('is-play');
+      playButton.classList.remove('is-loading');
     }
   });
 }

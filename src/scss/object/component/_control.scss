@@ -28,6 +28,11 @@
   [data-load="true"] & {
     cursor: pointer;
     background: rgba(#000, .2);
+
+    &.is-loading {
+      cursor: inherit;
+      pointer-events: none;
+    }
   }
 
   [data-load="true"][data-play="true"] & {
@@ -95,6 +100,10 @@
     border-left: 20px solid #fff;
     transform: translateX(10px);
   }
+}
+
+[data-load="true"] .is-loading .c-control__button {
+  animation: spin 2s cubic-bezier(0.415, 0.965, 0.660, 0.355) infinite;
 }
 
 [data-load="true"][data-play="false"] .c-control__button {
