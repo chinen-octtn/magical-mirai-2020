@@ -9,7 +9,7 @@ export function player() {
   const media = document.querySelector('#media');
   // beat block
   const beatWrap = document.querySelector('#beat');
-  const beatCircle = beatWrap.querySelector('.beat-circle');
+  const beatCircle = beatWrap.querySelector('.c-beat-circle');
   // lyric block
   const textWrap =       document.querySelector("#text");
   const nextText =       document.querySelector("#text-next");
@@ -87,7 +87,7 @@ export function player() {
       let word = unit._parent.text;
       if (wordMemo !== word) {
         wordMemo = word;
-        textWrap.innerHTML = `<p class="text"><span class="text-inner">${word}</span></p>`;
+        textWrap.innerHTML = `<p class="c-text"><span class="c-text__inner">${word}</span></p>`;
       }
 
       let phraseWord = unit.next._parent.text;
@@ -121,7 +121,7 @@ export function player() {
       body.setAttribute('data-load', 'true');
 
       // タイトルを表示
-      const title = document.querySelector('.text-song-name');
+      const title = document.querySelector('.c-text__song');
       title.innerText = player.data.song.name;
 
       nextText.innerText = player.video.firstPhrase;
@@ -142,8 +142,8 @@ export function player() {
       const beat = player.getBeats().length;
 
       if(beat) {
-        beatWrap.removeAttribute('data-time');
-        beatWrap.setAttribute('data-time', `${beat}`);
+        beatWrap.removeAttribute('data-beat');
+        beatWrap.setAttribute('data-beat', `${beat}`);
       }
     },
     onPlay: () => {

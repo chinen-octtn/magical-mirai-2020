@@ -7,21 +7,21 @@ block js
 block body
   main
     h1.l-title 初音ミク「マジカルミライ 2020」プログラミング・コンテスト練習
-    p.alert 音声が流れます
+    p.c-alert 音声が流れます
 
-    #beat
-      .beat-circle
+    #beat.c-beat
+      .c-beat-circle
 
     #media.c-media
 
-    .textWrap
-      #text
-        p.text
-          span.text-song-name
-          span.text-inner
+    .c-text-wrap
+      .c-text
+        p#text.c-text__text
+          span.c-text__song
+          span.c-text__inner
 
-    #text-next
+    #text-next.c-text-next
 
-    .c-control#play
+    #play.c-control
       button.c-control__button(aria-label="再生する")
 

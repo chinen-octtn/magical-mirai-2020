@@ -1,6 +1,6 @@
 @use './foundation/_define' as *;
 
-.textWrap {
+.c-text-wrap {
   width: 100%;
   perspective: 20vw;
   transform-style: preserve-3d;
@@ -9,7 +9,7 @@
   transform: translate3d(0, 0, 5vw);
 }
 
-#text {
+.c-text {
   transform: rotateY(20deg);
   width: 100%;
   min-height: 2em;
@@ -18,7 +18,7 @@
   font-size: 3vw;
 }
 
-.text {
+.c-text__text {
   position: relative;
   min-height: 2em;
   display: flex;
@@ -63,7 +63,7 @@
   }
 }
 
-.text-inner {
+.c-text__inner {
   display: block;
   position: relative;
   z-index: 1;
@@ -87,15 +87,15 @@
   }
 }
 
-#text-next {
+.c-text__song {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.c-text-next {
   position: fixed;
   left: 10px;
   bottom: 10px;
   opacity: 0;
   z-index: -1;
-}
-
-.text-song-name {
-  padding-top: 10px;
-  padding-bottom: 10px;
 }
