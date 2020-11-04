@@ -1,67 +1,105 @@
 import { Player } from "textalive-app-api";
 
 export function player() {
+  // body
+  const body = document.querySelector('#app');
+  // Youtube　URL
   const song = 'https://www.youtube.com/watch?v=ygY2qObZv24';
+  // media block
   const media = document.querySelector('#media');
+  // beat block
+  const beatWrap = document.querySelector('#beat');
+  const beatCircle = beatWrap.querySelector('.beat-circle');
+  // lyric block
+  const textWrap =       document.querySelector("#text");
+  const nextText =       document.querySelector("#text-next");
 
-  const body = document.querySelector('body');
+  // 歌詞を切り替え
+  const lyricObserver = () => {
+    const target = textWrap;
 
-  const textWrap =       document.querySelector("#text")
-  const lyricBody = document.querySelector('#phrase');
-
-  const target = textWrap;
-
-  // オブザーバインスタンスを作成
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
+    // オブザーバインスタンスを作成
+    const observer = new MutationObserver(() => {
       const text = textWrap.querySelector('.text');
 
       requestAnimationFrame(() => {
         setTimeout(() => {
           text.classList.add('is-active');
-        }, 100)
+        }, 0)
       });
     });
-  });
 
-  // オブザーバの設定
-  const config = {
-    attributes: true,
-    childList: true,
-    characterData: true
-  };
+    // オブザーバの設定
+    const config = {
+      attributes: true,
+      childList: true,
+      characterData: true
+    };
 
-  // 対象ノードとオブザーバの設定を渡す
-  observer.observe(target, config);
+    // 対象ノードとオブザーバの設定を渡す
+    observer.observe(target, config);
+  }
 
-  // TextAlive Player を作る
+  // beatを切り替え
+  const beatObserver = () => {
+    const target = beatWrap;
+
+    // オブザーバインスタンスを作成
+    const observer = new MutationObserver(() => {
+      requestAnimationFrame(() => {
+        beatCircle.classList.remove('is-beat');
+        setTimeout(() => {
+          beatCircle.classList.add('is-beat');
+        }, 0)
+      });
+    });
+
+    // オブザーバの設定
+    const config = {
+      attributes: true,
+      childList: true,
+      characterData: true
+    };
+
+    // 対象ノードとオブザーバの設定を渡す
+    observer.observe(target, config);
+  }
+
+  // 表示切り替え用オブザーバー実行
+  lyricObserver();
+  beatObserver();
+
+  // TextAlive Player
   const player = new Player({
     app: true,
     mediaElement: media
   });
 
-  let memo;
+  let wordMemo;
+  let phraseMemo;
 
-  // 単語が発声されていたら #text に表示する
+  // 単語が発声されていたら表示する
   const animateWord = function (now, unit) {
     if (unit.contains(now)) {
-      if (memo !== unit.text) {
-        memo = unit.text;
-        textWrap.innerHTML = `<p class="text">${unit.text}</p>`;
+      // 歌詞を取得（word）
+      // let word = unit.text;
+      // 歌詞を取得（phrase）
+      let word = unit._parent.text;
+      if (wordMemo !== word) {
+        wordMemo = word;
+        textWrap.innerHTML = `<p class="text"><span class="text-inner">${word}</span></p>`;
       }
 
-      const lyric = unit;
-      // if(lyric) {
-      //   lyricBody.innerHTML(`<p class="c-phrase">${lyric}</p>`);
-      // }
-      // console.log('player.video.firstWord');
-      // console.log(lyric);
+      let phraseWord = unit.next._parent.text;
+      if (phraseMemo !== phraseWord) {
+        phraseMemo = phraseWord;
+        nextText.innerText = phraseWord;
+      }
     }
-    // console.log(unit);
   };
 
   player.addListener({
-    // 動画オブジェクトの準備が整ったとき（楽曲に関する情報を読み込み終わったとき）に呼ばれる
+    // 実行の準備が整ったとき
     onAppReady(app) {
       if (app.managed) {
         document.querySelector("#control").className = "disabled";
@@ -70,18 +108,25 @@ export function player() {
         player.createFromSongUrl(song);
       }
     },
-    onVideoReady: (v) => {
-      // 定期的に呼ばれる各単語の "animate" 関数をセットする
+    onVideoReady: () => {
+      // 動画の読み込み開始
       let w = player.video.firstWord;
       while (w) {
         w.animate = animateWord;
         w = w.next;
       }
     },
-    onTimerReady: (v) => {
-      // 動画の再生準備ができるまでLoading
+    onTimerReady: () => {
+      // 動画の再生準備ができたとき
       body.setAttribute('data-load', 'true');
 
+      // タイトルを表示
+      const title = document.querySelector('.text-song-name');
+      title.innerText = player.data.song.name;
+
+      nextText.innerText = player.video.firstPhrase;
+
+      // 再生ボタン
       const buttonPlay = document.querySelector('#play').addEventListener('click', e => {
         e.preventDefault();
 
@@ -92,26 +137,23 @@ export function player() {
         }
       })
     },
-    onThrottledTimeUpdate: (position) => {
-      // 0.1秒単位
-      const time = Math.floor(position / 100);
-      document.querySelector('#app').setAttribute('data-time', `time${time}`);
+    onThrottledTimeUpdate: () => {
+      // 再生中に0.1秒単位で実行
+      const beat = player.getBeats().length;
 
-      if (!player.video.firstChar) {
-        return;
+      if(beat) {
+        beatWrap.removeAttribute('data-time');
+        beatWrap.setAttribute('data-time', `${beat}`);
       }
-
-      // console.log('beat:');
-      // console.log(player.video.phrases[player.videoPosition].text);
-      // console.log(player.video.firstWord);
     },
     onPlay: () => {
-      console.log('再生中');
+      // 再生したとき
+      media.classList.add('is-active')
       media.classList.add('is-play');
       body.setAttribute('data-play', 'true')
     },
     onPause: () => {
-      console.log('停止');
+      // 一時停止したとき
       body.setAttribute('data-play', 'false')
       media.classList.remove('is-play');
     }

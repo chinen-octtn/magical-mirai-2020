@@ -13,8 +13,8 @@ html(lang=site.lang)
     block css
     include /_include/_js
     block js
-  body(data-load="false", data-play="false")
-    #app
+  body
+    #app(data-load="false", data-play="false")
       include /_include/_header
 
       block body

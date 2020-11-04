@@ -1,5 +1,7 @@
 @use './foundation/_reset';
 @use './layout/_layout';
-@use './object/component/media';
-@use './object/component/beat';
 @use './object/component/control';
+@use './object/component/alert';
+@use './object/component/media';
+@use './object/component/text';
+@use './object/component/beat';

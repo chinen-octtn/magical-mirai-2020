@@ -1,20 +1,45 @@
 @use './foundation/_define' as *;
 
-.c-beat {
+@keyframes scale {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.3);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+}
+
+#beat {
   position: fixed;
-  z-index: -1;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
+  transform: translate3d(0, 0, -20vw);
+  z-index: 1;
+}
 
-  .c-beat__circle {
-    background: rgba(#000, .5);
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
+.beat-circle {
+  position: fixed;
+  top: 50%;
+  left: 20%;
+  transform: translate(-50%, -50%) scale(0.1);
+  border-radius: 50%;
+  width: 100%;
+  padding-top: 100%;
+  opacity: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 0%, transparent 10%, #39C5BB 40%, transparent 70%, transparent 100%);
+
+  &.is-beat {
+    opacity: 1;
+    animation: scale .1s ease-in forwards;
   }
 }

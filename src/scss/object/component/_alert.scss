@@ -1,0 +1,17 @@
+@use './foundation/_define' as *;
+
+.alert {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  z-index: 30;
+  font-size: 5vw;
+  text-shadow: -1px -1px 1px #39c5bb, 0px 0px 2px #666;
+
+  [data-load="true"] & {
+    opacity: 0;
+  }
+}
