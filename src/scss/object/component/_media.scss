@@ -1,0 +1,16 @@
+@use './foundation/_define' as *;
+
+.c-media {
+  position: fixed;
+  right: 10px;
+  bottom: 30px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: inset 0 0 3px rgba(#ccc, .7);
+  transform: translateZ(10deg);
+
+  iframe {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+}

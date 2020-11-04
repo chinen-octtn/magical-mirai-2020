@@ -1,0 +1,57 @@
+@charset "UTF-8";
+//
+// color
+// --------------------------------------------------
+$color-link: #3498db;
+$color-main: #3faee2;
+
+//
+// margin
+// --------------------------------------------------
+$size-s: 8px;
+$size-m: 16px;
+$size-l: 24px;
+
+//
+// interaction
+// --------------------------------------------------
+$time: 0.3s;
+$easing: ease-in-out;
+
+//
+// breakpoint
+// --------------------------------------------------
+
+// width
+$full: 1280px;
+$pc: 1024px;
+$tablet: 768px;
+$sp: 767px;
+
+// e.g. breakpoint (sp/tablet/pc/full)
+// @include mq(sp){
+//   .className {
+//     property: value;
+//   }
+// }
+@mixin mq($point) {
+  @if $point == tablet {
+    @media print, screen and (min-width: $tablet) { @content ; }
+  }
+
+  @else if $point == pc {
+    @media print, screen and (min-width: $pc) { @content ; }
+  }
+
+  @else if $point == full {
+    @media print, screen and (min-width: $full) { @content ; }
+  }
+
+  @else if $point == sp {
+    @media print, screen and (max-width: 767px) { @content ; }
+  }
+
+  @else {
+    @media print, screen and (min-width: $point) { @content ; }
+  }
+}

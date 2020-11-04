@@ -1,0 +1,22 @@
+{
+  "url": "https://github.com/chinen-octtn/",
+  "name": "GitHub - chinen-octtn",
+  "viewport": "width=device-width",
+  "description": "サイトの概要",
+  "keywords": "",
+  "lang": "ja",
+  "locale": "ja_JP",
+  "siteImage": "",
+  "fbAppId": "",
+  "fbAdmins": "",
+  "twitterCard": "summary_large_image",
+  "twitterSite": "",
+  "/": {
+    "name": "初音ミク「マジカルミライ 2020」プログラミング・コンテスト応募作品",
+    "description": "初音ミク「マジカルミライ 2020」プログラミング・コンテストの応募作品です。製作者：まぁし",
+    "keywords": "",
+    "ogp": "",
+    "canonical": "",
+    "alternate": ""
+  }
+}

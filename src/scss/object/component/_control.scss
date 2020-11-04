@@ -1,0 +1,121 @@
+@use './foundation/_define' as *;
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.c-control {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(#000, .5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  transition: width $time $easing, height $time $easing, right $time $easing, bottom $time $easing;
+
+  [data-load="true"] & {
+    cursor: pointer;
+  }
+
+  [data-load="true"][data-play="true"] & {
+    top: auto;
+    right: 20px;
+    bottom: 40px;
+    left: auto;
+    width: 256px;
+    height: 144px;
+    border-radius: 10px;
+  }
+}
+
+.c-control__button {
+  transition: border .5s $easing, background-color .5s $easing, width .5s $easing, height .5s $easing;
+  position: relative;
+  padding: 0;
+  width: 60px;
+  height: 60px;
+  background: transparent;
+  box-sizing: border-box;
+  border: 4px solid #000;
+  border-radius: 50%;
+  animation: spin 2s cubic-bezier(0.415, 0.965, 0.660, 0.355) infinite;
+  mask-image: repeating-conic-gradient(#000 0% 6%, transparent 6% 9%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::before,
+  &::after {
+    content: "";
+    transition: opacity $time $time $easing, height $time $easing;
+    height: 0;
+  }
+
+  &::after {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+[data-load="false"] .c-control__button {
+  &::before,
+  &::after {
+    opacity: 0;
+  }
+}
+
+[data-load="true"] .c-control__button {
+  // border: 2px solid #fff;
+  box-shadow: 0 0 3px 2px #fff;
+  width: 80px;
+  height: 80px;
+  animation: none;
+  mask-image: none;
+  background: #000;
+  cursor: pointer;
+  outline: transparent;
+
+  &::before {
+    opacity: 1;
+    border: 10px solid transparent;
+    border-left: 20px solid #fff;
+    transform: translateX(10px);
+  }
+}
+
+[data-load="true"][data-play="false"] .c-control__button {
+  &::before {
+    transition: border $time $easing;
+  }
+}
+
+[data-play="true"] .c-control__button {
+  &::before {
+    height: 20px;
+    border: 0;
+    border-left: 4px solid #fff;
+    transform: translateX(-6px);
+    transition: opacity $time $time $easing, height $time $easing;
+  }
+
+  &::after {
+    left: 50%;
+    width: 4px;
+    height: 20px;
+    background: #fff;
+    margin-left: 2px;
+  }
+}
