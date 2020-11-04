@@ -1,0 +1,332 @@
+/*
+html5doctor.com Reset Stylesheet
+v1.6.1
+Last Updated: 2010-09-17
+Author: Richard Clark - http://richclarkdesign.com
+Twitter: @rich_clark
+*/
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  line-height: 1;
+  font-family: "M PLUS Rounded 1c";
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+nav ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+a {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+/* change colours to suit your needs */
+ins {
+  background-color: #ff9;
+  color: #000;
+  text-decoration: none;
+}
+
+/* change colours to suit your needs */
+mark {
+  background-color: #ff9;
+  color: #000;
+  font-style: italic;
+  font-weight: bold;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* change border colour to suit your needs */
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #cccccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+input, select {
+  vertical-align: middle;
+}
+
+.l-title {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  font-size: 1rem;
+  font-weight: normal;
+  color: #666;
+}
+
+main {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.textWrap {
+  width: 100%;
+  perspective: 20vw;
+  transform-style: preserve-3d;
+}
+
+#text {
+  background: #000;
+  color: #fff;
+  transform: rotateY(30deg);
+  width: 100%;
+  height: 1em;
+  text-align: center;
+  font-size: 10vw;
+  width: 0;
+  transition: width 0.3s ease-in-out;
+}
+[data-load=true] #text {
+  width: 100%;
+}
+
+.text {
+  position: relative;
+}
+.text::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 1;
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+}
+.text.is-active::before {
+  opacity: 0;
+}
+
+.alert {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #ccc;
+  z-index: 10;
+  font-size: 5vw;
+  transition: opacity 0.3s ease-in-out;
+}
+[data-load=true] .alert {
+  opacity: 0;
+}
+
+.c-media {
+  position: fixed;
+  right: 10px;
+  bottom: 30px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: inset 0 0 3px rgba(204, 204, 204, 0.7);
+  transform: translateZ(10deg);
+}
+.c-media iframe {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.c-beat {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.c-beat .c-beat__circle {
+  background: rgba(0, 0, 0, 0.5);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.c-control {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out, right 0.3s ease-in-out, bottom 0.3s ease-in-out;
+}
+[data-load=true] .c-control {
+  cursor: pointer;
+}
+[data-load=true][data-play=true] .c-control {
+  top: auto;
+  right: 20px;
+  bottom: 40px;
+  left: auto;
+  width: 256px;
+  height: 144px;
+  border-radius: 10px;
+}
+
+.c-control__button {
+  transition: border 0.5s ease-in-out, background-color 0.5s ease-in-out, width 0.5s ease-in-out, height 0.5s ease-in-out;
+  position: relative;
+  padding: 0;
+  width: 60px;
+  height: 60px;
+  background: transparent;
+  box-sizing: border-box;
+  border: 4px solid #000;
+  border-radius: 50%;
+  -webkit-animation: spin 2s cubic-bezier(0.415, 0.965, 0.66, 0.355) infinite;
+          animation: spin 2s cubic-bezier(0.415, 0.965, 0.66, 0.355) infinite;
+  -webkit-mask-image: repeating-conic-gradient(#000 0% 6%, transparent 6% 9%);
+          mask-image: repeating-conic-gradient(#000 0% 6%, transparent 6% 9%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.c-control__button::before, .c-control__button::after {
+  content: "";
+  transition: opacity 0.3s 0.3s ease-in-out, height 0.3s ease-in-out;
+  height: 0;
+}
+.c-control__button::after {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+[data-load=false] .c-control__button::before, [data-load=false] .c-control__button::after {
+  opacity: 0;
+}
+
+[data-load=true] .c-control__button {
+  box-shadow: 0 0 3px 2px #fff;
+  width: 80px;
+  height: 80px;
+  -webkit-animation: none;
+          animation: none;
+  -webkit-mask-image: none;
+          mask-image: none;
+  background: #000;
+  cursor: pointer;
+  outline: transparent;
+}
+[data-load=true] .c-control__button::before {
+  opacity: 1;
+  border: 10px solid transparent;
+  border-left: 20px solid #fff;
+  transform: translateX(10px);
+}
+
+[data-load=true][data-play=false] .c-control__button::before {
+  transition: border 0.3s ease-in-out;
+}
+
+[data-play=true] .c-control__button::before {
+  height: 20px;
+  border: 0;
+  border-left: 4px solid #fff;
+  transform: translateX(-6px);
+  transition: opacity 0.3s 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+[data-play=true] .c-control__button::after {
+  left: 50%;
+  width: 4px;
+  height: 20px;
+  background: #fff;
+  margin-left: 2px;
+}
