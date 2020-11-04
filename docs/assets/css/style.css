@@ -162,12 +162,16 @@ main {
   align-items: center;
   justify-content: center;
   z-index: 4;
-  transition: width 0.3s ease-in-out, height 0.3s ease-in-out, right 0.3s ease-in-out, bottom 0.3s ease-in-out, border-radius 0.3s 0.3s;
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out, right 0.3s ease-in-out, bottom 0.3s ease-in-out;
   transform: translate3d(0, 0, 20vw);
 }
 [data-load=true] .c-control {
   cursor: pointer;
   background: rgba(0, 0, 0, 0.2);
+}
+[data-load=true] .c-control.is-loading {
+  cursor: inherit;
+  pointer-events: none;
 }
 [data-load=true][data-play=true] .c-control {
   right: 20px;
@@ -175,6 +179,7 @@ main {
   width: 80px;
   height: 80px;
   border-radius: 50%;
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out, right 0.3s ease-in-out, bottom 0.3s ease-in-out, border-radius 0.3s 0.3s;
 }
 
 .c-control__button {
@@ -231,6 +236,11 @@ main {
   transform: translateX(10px);
 }
 
+[data-load=true] .is-loading .c-control__button {
+  -webkit-animation: spin 2s cubic-bezier(0.415, 0.965, 0.66, 0.355) infinite;
+          animation: spin 2s cubic-bezier(0.415, 0.965, 0.66, 0.355) infinite;
+}
+
 [data-load=true][data-play=false] .c-control__button::before {
   transition: border 0.3s ease-in-out;
 }
@@ -250,7 +260,7 @@ main {
   margin-left: 2px;
 }
 
-.alert {
+.c-alert {
   position: fixed;
   top: 50px;
   left: 0;
@@ -261,7 +271,7 @@ main {
   font-size: 5vw;
   text-shadow: -1px -1px 1px #39c5bb, 0px 0px 2px #666;
 }
-[data-load=true] .alert {
+[data-load=true] .c-alert {
   opacity: 0;
 }
 
@@ -302,7 +312,7 @@ main {
   opacity: 1;
 }
 
-.textWrap {
+.c-text-wrap {
   width: 100%;
   perspective: 20vw;
   transform-style: preserve-3d;
@@ -311,7 +321,7 @@ main {
   transform: translate3d(0, 0, 5vw);
 }
 
-#text {
+.c-text {
   transform: rotateY(20deg);
   width: 100%;
   min-height: 2em;
@@ -319,7 +329,7 @@ main {
   font-size: 3vw;
 }
 
-.text {
+.c-text__text {
   position: relative;
   min-height: 2em;
   display: flex;
@@ -332,10 +342,10 @@ main {
   transition: transform 0.3s ease-out;
   padding: 0 10% 0 15%;
 }
-[data-load=true] .text {
+[data-load=true] .c-text__text {
   transform: scaleX(1);
 }
-.text::before {
+.c-text__text::before {
   content: "";
   position: absolute;
   right: 0;
@@ -349,16 +359,16 @@ main {
   transition: transform 0.3s ease-out, opacity 0.1s ease-out;
   z-index: 2;
 }
-.text.is-active::before {
+.c-text__text.is-active::before {
   transform: scaleX(0);
 }
 
-.text-inner {
+.c-text__inner {
   display: block;
   position: relative;
   z-index: 1;
 }
-.text-inner::before {
+.c-text__inner::before {
   content: "";
   position: absolute;
   top: 0;
@@ -370,21 +380,21 @@ main {
   transform-origin: top right;
   transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 }
-.is-active .text-inner::before {
+.is-active .c-text__inner::before {
   opacity: 0;
 }
 
-#text-next {
+.c-text__song {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.c-text-next {
   position: fixed;
   left: 10px;
   bottom: 10px;
   opacity: 0;
   z-index: -1;
-}
-
-.text-song-name {
-  padding-top: 10px;
-  padding-bottom: 10px;
 }
 
 @-webkit-keyframes scale {
@@ -416,7 +426,7 @@ main {
     transform: translate(-50%, -50%) scale(0.5);
   }
 }
-#beat {
+.c-beat {
   position: fixed;
   top: 0;
   left: 0;
@@ -428,7 +438,7 @@ main {
   z-index: 1;
 }
 
-.beat-circle {
+.c-beat-circle {
   position: fixed;
   top: 50%;
   left: 20%;
@@ -439,18 +449,18 @@ main {
   opacity: 0;
   background: radial-gradient(circle at 50% 50%, transparent 0%, transparent 10%, #39C5BB 40%, transparent 70%, transparent 100%);
 }
-.beat-circle.is-beat {
+.c-beat-circle.is-beat {
   opacity: 1;
   -webkit-animation: scale 0.1s ease-in forwards;
           animation: scale 0.1s ease-in forwards;
 }
 @media print, screen and (min-width: 375px) {
-  .text {
+  .c-text__text {
     padding-left: 20%;
   }
 }
 @media print, screen and (min-width: 768px) {
-  .text {
+  .c-text__text {
     padding-left: 20%;
   }
 }
