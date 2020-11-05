@@ -1,5 +1,5 @@
 {
-  "url": "https://github.com/chinen-octtn/",
+  "url": "https://chinen-octtn.github.io",
   "name": "GitHub - chinen-octtn",
   "viewport": "width=device-width",
   "description": "サイトの概要",
@@ -11,11 +11,11 @@
   "fbAdmins": "",
   "twitterCard": "summary_large_image",
   "twitterSite": "",
-  "/": {
+  "/magical-mirai-2020/": {
     "name": "初音ミク「マジカルミライ 2020」プログラミング・コンテスト応募作品",
     "description": "初音ミク「マジカルミライ 2020」プログラミング・コンテストの応募作品です。製作者：まぁし",
     "keywords": "",
-    "ogp": "",
+    "ogp": "/magical-mirai-2020/assets/img/mirai.png",
     "canonical": "",
     "alternate": ""
   }
