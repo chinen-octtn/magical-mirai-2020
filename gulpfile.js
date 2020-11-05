@@ -113,7 +113,7 @@ function sass() {
       }))
       .pipe(
         gulpSass({
-          outputStyle: 'expanded', // expanded or compressed
+          outputStyle: 'compressed', // expanded or compressed
         }).on('error', gulpSass.logError),
       )
       .pipe(plumber({ errorHandler: notify.onError('Error: <%= error.message %>') }))
