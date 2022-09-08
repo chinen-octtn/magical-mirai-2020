@@ -21,6 +21,10 @@
     width: 100% !important;
     height: 100% !important;
   }
+  &.is-play > * {
+    transition: transform $time $easing, opacity $time $easing;
+    transform: rotateY(-20deg) translateZ(-15vw);
+  }
 
   iframe {
     border-radius: 10px;
@@ -30,11 +34,7 @@
     width: 100%;
     height: 100%;
     display: block;
-
-    [data-play="true"] & {
-      transition: transform $time $easing, opacity $time $easing;
-      transform: rotateY(-20deg) translateZ(-15vw);
-    }
+    transform-style: preserve-3d;
   }
 
   &.is-active iframe {
