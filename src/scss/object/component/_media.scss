@@ -20,6 +20,8 @@
   > * {
     width: 100% !important;
     height: 100% !important;
+    transform-style: preserve-3d;
+    transition: opacity $time $easing, transform $time*2 $easing;
   }
   &.is-play > * {
     transition: transform $time $easing, opacity $time $easing;
@@ -29,12 +31,10 @@
   iframe {
     border-radius: 10px;
     overflow: hidden;
-    transition: opacity $time $easing, transform $time*2 $easing;
     opacity: 0;
     width: 100%;
     height: 100%;
     display: block;
-    transform-style: preserve-3d;
   }
 
   &.is-active iframe {
